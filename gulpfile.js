@@ -6,7 +6,7 @@ var path = require('path');
 var gulp = require('gulp');
 var gulpUtil = require('gulp-util');
 var del = require('del');
-var createTestTask = require('./js/test/createTestTask');
+//var createTestTask = require('./js/test/createTestTask');
 var createWebpackBuildTask = require('./js/webpack/createBuildTask');
 var createWebpackWatchTask = require('./js/webpack/createWatchTask');
 var createWebpackRunDevServerTask = require('./js/webpack/createRunDevServerTask');
@@ -40,6 +40,6 @@ gulp.task('clean', function (done) {
 gulp.task('webpack', ['clean'], createWebpackBuildTask(gulpUtil, paths, (config.production ? 'production' : 'dev')));
 gulp.task('watch', createWebpackWatchTask(gulpUtil, paths));
 gulp.task('dev-server', ['clean'], createWebpackRunDevServerTask(paths));
-gulp.task('test', createTestTask(gulp, 'js/**/__tests__/*Test.js'));
+//gulp.task('test', createTestTask(gulp, 'js/**/__tests__/*Test.js'));
 
 gulp.task('default', ['webpack']);

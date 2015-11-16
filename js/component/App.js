@@ -9,16 +9,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
 
-    click() {
-        const dispatch = this.props.dispatch;
-    }
-
     render() {
         return <div className="container">
             <h1>Weather forecast</h1>
-            <Weather />
-            <Chart />
-            <Map />
+
+            <div className="row">
+                <div className="col-lg-6">
+                    <Weather />
+                </div>
+                <div className="col-lg-6">
+                    <Map />
+                </div>
+                <div className="col-lg-12">
+                    <Chart />
+                </div>
+            </div>
         </div>;
     }
 

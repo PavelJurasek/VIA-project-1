@@ -1,10 +1,12 @@
 import config from '../config';
 import $ from 'jquery';
-import {selectQuery} from './weatherSelectors';
+import {selectQuery, selectShowNDays, selectUnit} from './weatherSelectors';
 import {updateChart} from './chartActions';
 import {updateMap} from './mapActions';
 
 export const SEARCH = 'WEATHER_SEARCH';
+export const UPDATE_SHOW_N_DAYS = 'UPDATE_SHOW_N_DAYS';
+export const UPDATE_UNIT = 'UPDATE_UNIT';
 export const SAVE_DATA = 'WEATHER_SAVE_DATA';
 
 export function search(query) {
@@ -14,11 +16,26 @@ export function search(query) {
     };
 }
 
+export function updateShowNDays(days) {
+    return {
+        type: UPDATE_SHOW_N_DAYS,
+        days,
+    };
+}
+
+export function updateUnit(unit) {
+    return {
+        type: UPDATE_UNIT,
+        unit,
+    };
+}
+
 export function submitSearch() {
     return (dispatch, getState) => {
         const state = getState();
         const query = selectQuery(state);
-        const cnt = 10;
+        const cnt = selectShowNDays(state);
+        const unit = selectUnit(state);
 
         if (query == null) {
             return;
@@ -27,7 +44,7 @@ export function submitSearch() {
         const url = config.apiUrl +
             '/weather?q=' + query +
             '&appid=' + config.apiKey +
-            '&units=metric';
+            '&units=' + unit;
 
         $.getJSON(url, (data) => {
             dispatch(search(data.name));
@@ -38,7 +55,7 @@ export function submitSearch() {
                 '/forecast/daily?q=' + query +
                 '&cnt=' + cnt +
                 '&appid=' + config.apiKey +
-                '&units=metric';
+                '&units=' + unit;
 
         $.getJSON(forecastUrl, (data) => {
             dispatch(updateChart(data));
