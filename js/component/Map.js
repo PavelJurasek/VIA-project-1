@@ -8,7 +8,7 @@ class Map extends React.Component {
     render() {
         var map;
         if (this.props.coordinates) {
-            map = <Gmaps width="400" height="400" lat={this.props.coordinates.lat} lng={this.props.coordinates.lng} zoom={12}><Marker lat={this.props.coordinates.lat} lng={this.props.coordinates.lng}/></Gmaps>;
+            map = <Gmaps width="100%" height="260" lat={this.props.coordinates.lat} lng={this.props.coordinates.lng} zoom={12}><Marker lat={this.props.coordinates.lat} lng={this.props.coordinates.lng}/></Gmaps>;
         }
 
         return <div>
