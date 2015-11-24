@@ -34,6 +34,14 @@ class Weather extends React.Component {
         dispatch(submitSearch());
     }
 
+    keydown(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+
+            this.submit();
+        }
+    }
+
     render() {
         const metric = {}, imperial = {};
 
@@ -51,6 +59,7 @@ class Weather extends React.Component {
                         type="text"
                         className="input form-control"
                         onChange={this.changeQuery.bind(this)}
+                        onKeyDown={this.keydown.bind(this)}
                     />
                 </div>
 
